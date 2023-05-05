@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories</title>
+    <script src="../js/stories.js"></script>
+    <script src="../js/utilidades.js"></script>
+
+</head>
+<body>
+    
+    <h2 id="titulo"></h2>
+    <p id="text">
+    </p>
+    <script>
+        apiKeyMarvel = {
+            render: () => {
+                const urlAPI =
+                    "https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=2c4c314d5d9ba2524513811acd67d577&hash=3fbe538512a39bfea1553fd095d98c68";
+                fetch(urlAPI)
+                    .then((response) => response.json())
+                    .then((json) => {
+                        let datos = json.data.results;
+                        let texto = document.querySelector("#text");
+                        let titulo = document.querySelector("#titulo");
+                        titulo.innerText = datos[1].name;
+                        texto.innerText = "available: " + datos[1].stories.available + 
+                        ";\n \ncollectionURI: " + datos[1].stories.collectionURI + ";\n \nreturned: " +
+                        datos[1].stories.returned + ";";        
+                    });
+            },
+        };
+        apiKeyMarvel.render();
+    </script>
+
+
+</body>
+</html>
